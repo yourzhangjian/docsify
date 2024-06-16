@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <meta name="description" content="Description">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
+  <link rel="stylesheet" href="css/vue.css">
 </head>
 <body>
   <div id="app"></div>
@@ -20,12 +20,45 @@
       subMaxLevel: 3,
       coverpage: true,
       name: '',
-      repo: ''
+      repo: '',
+      search: 'auto',
+      search: [
+        '/',            // => /README.md
+        '/guide',       // => /guide.md
+        '/get-started', // => /get-started.md
+        '/zh-cn/',      // => /zh-cn/README.md
+      ],
+
+      // complete configuration parameters
+      search: {
+        maxAge: 86400000, // Expiration time, the default one day
+        paths: [], // or 'auto'
+        placeholder: '搜索',
+        noData: '找不到结果...',
+        // Headline depth, 1 - 6
+        depth: 2,
+        hideOtherSidebarContent: false, // whether or not to hide other sidebar content
+        // To avoid search index collision
+        // between multiple websites under the same domain
+        namespace: 'website-1',
+        // Use different indexes for path prefixes (namespaces).
+        // NOTE: Only works in 'auto' mode.
+        //
+        // When initialiazing an index, we look for the first path from the sidebar.
+        // If it matches the prefix from the list, we switch to the corresponding index.
+        pathNamespaces: ['/zh-cn', '/ru-ru', '/ru-ru/v1'],
+        // You can provide a regexp to match prefixes. In this case,
+        // the matching substring will be used to identify the index
+        pathNamespaces: /^(\/(zh-cn|ru-ru))?(\/(v1|v2))?/,
+      },
     }
   </script>
   <!-- Docsify v4 -->
-  <script src="//cdn.jsdelivr.net/npm/docsify@4"></script>
-  <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/emoji.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/vue@2/dist/vue.min.js"></script>
+  <script src="js/docsify.min.js"></script>
+  <script src="js/search.min.js"></script>
+  <script src="js/emoji.min.js"></script>
+  <script src="js/vue.min.js"></script>
+  <script src="js/prism-bash.min.js"></script>
+  <script src="js/prism-php.min.js"></script>
 </body>
 </html>
