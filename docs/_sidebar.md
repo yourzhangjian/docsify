@@ -5,5 +5,6 @@
     * [指南2](/zh-cn/)
     * [指南2](/zh-cn/)
 * [部署教程](/deploy/)
-    * [GitLab教程](/deploy/gitlab/README.md)
-    * [Nexus教程](/nexus/)
+    * [GitLab教程](/deploy/gitlab.md)
+    * [Nexus教程](/deploy/nexus.md)
+    * [DEMO教程](/deploy/demo/)
