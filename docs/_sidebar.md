@@ -7,4 +7,5 @@
 * [部署教程](/deploy/)
     * [GitLab教程](/deploy/gitlab.md)
     * [Nexus教程](/deploy/nexus.md)
+    * [MySQL教程](/deploy/mysql.md)
     * [DEMO教程](/deploy/demo/)
