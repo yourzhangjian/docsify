@@ -63,7 +63,9 @@ ERROR 1819 (HY000): Your password does not satisfy the current policy requiremen
 set global validate_password.policy=0;
 set global validate_password.length=6;
 
- 
+# 配置文件、数据存储位置
+/etc/my.cnf
+/var/lib/mysql 
  
 ```
 
