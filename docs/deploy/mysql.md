@@ -35,6 +35,10 @@ rpm -e --nodeps mariadb-libs-5.5.68-1.el7.x86_64
  rpm -ivh mysql-community-libs-compat-8.0.21-1.el7.x86_64.rpm
  rpm -ivh mysql-community-test-8.0.21-1.el7.x86_64.rpm
  
+ # 可能出错需安装依赖
+ yum install perl-JSON -y
+ yum install perl-Test-* -y
+ 
  # 查看服务状态
  systemctl status mysqld
  
@@ -63,9 +67,22 @@ ERROR 1819 (HY000): Your password does not satisfy the current policy requiremen
 set global validate_password.policy=0;
 set global validate_password.length=6;
 
+# 创建远程可读用户(创建|修改|授权)
+CREATE USER 'test'@'%' IDENTIFIED WITH mysql_native_password BY 'test';
+ALTER USER 'test'@'%' IDENTIFIED WITH mysql_native_password BY 'test';
+GRANT SELECT ON *.* TO 'test'@'%';
+
 # 配置文件、数据存储位置
 /etc/my.cnf
 /var/lib/mysql 
+
+# 数据备份与数据恢复
+mysqldump  -u root -p --all-databases > dump.sql
+mysqldump  -u root -p --databases db1 db2 db3 > dump.sql
+mysqldump  -u root -p test t1 t3 t7 > dump.sql
+
+mysql -u root -p db1 < dump.sql
+
  
 ```
 
