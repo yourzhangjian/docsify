@@ -1,5 +1,41 @@
 # Nexus安装与使用
 
+```bash
+# Maven官方地址：https://maven.apache.org
+# Maven搜索地址：https://mvnrepository.com
+
+# maven 中央仓库
+https://repo.maven.apache.org/maven2/
+https://repo1.maven.org/maven2/
+
+# aliyun maven仓库
+https://developer.aliyun.com/mvn/guide
+<repository>
+  <id>central</id>
+  <url>https://maven.aliyun.com/repository/central</url>
+  <releases>
+    <enabled>true</enabled>
+  </releases>
+  <snapshots>
+    <enabled>true</enabled>
+  </snapshots>
+</repository>
+
+# huaweicloud maven下载加速网址
+https://mirrors.huaweicloud.com/apache/maven/
+# huaweicloud maven仓库 https://mirrors.huaweicloud.com/home
+https://repo.huaweicloud.com/repository/maven/
+<mirror>
+    <id>huaweicloud</id>
+    <mirrorOf>*</mirrorOf>
+    <url>https://mirrors.huaweicloud.com/repository/maven/</url>
+</mirror>
+
+# maven maven仓库
+```
+
+
+
 ### 1、下载与安装
 
 ```bash
