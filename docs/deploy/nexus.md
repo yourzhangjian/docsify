@@ -32,6 +32,40 @@ https://repo.huaweicloud.com/repository/maven/
 </mirror>
 
 # maven maven仓库
+# maven settings 私库配置
+<server>
+  <id>nexus</id>
+  <username>admin</username>
+  <password>yourzhangjian</password>
+</server>
+
+<profile>
+  <id>nexus-jdk8</id>
+  <activation>
+    <jdk>1.8</jdk>
+  </activation>
+  <repositories>
+    <repository>
+      <id>nexus</id>
+      <name>Nexus私有仓库</name>
+      <url>http://127.0.0.1:8088/nexus/repository/maven-releases/</url>
+      <layout>default</layout>
+      <snapshotPolicy>always</snapshotPolicy>
+    </repository>
+    <repository>
+      <id>maven-huaweicloud</id>
+      <name>maven-huaweicloud代理仓库</name>
+      <url>http://127.0.0.1:8088/nexus/repository/maven-huaweicloud/</url>
+      <layout>default</layout>
+      <snapshotPolicy>always</snapshotPolicy>
+    </repository>
+  </repositories>
+</profile>
+
+<activeProfiles>
+  <activeProfile>nexus-jdk8</activeProfile>
+</activeProfiles>
+
 ```
 
 
