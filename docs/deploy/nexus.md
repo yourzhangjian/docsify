@@ -12,7 +12,7 @@ https://repo1.maven.org/maven2/
 https://developer.aliyun.com/mvn/guide
 <repository>
   <id>central</id>
-  <url>https://maven.aliyun.com/repository/central</url>
+  <url>https://maven.aliyun.com/repository/public</url>
   <releases>
     <enabled>true</enabled>
   </releases>
@@ -77,9 +77,9 @@ https://repo.huaweicloud.com/repository/maven/
 # 2、window安装 nexus.exe /run , 其他命令 /start, /stop, /restart, /force-reload and /status	(搭配数据库使用需要license)
 # 3、初始化启动好了在这个文件查看密码 sonatype-work/nexus3/admin.password, 登录会重置密码 admin\yourzhangjian
 # 4、配置端口 application-port=8081 in$data-dir/etc/nexus.properties
-application-port=8088
+application-port=8083
 # 5、配置上下文 update the nexus-context-path property in the $data-dir/etc/nexus.properties
-nexus-context-path=/nexus
+nexus-context-path=/nexus3
 # 6、4\5两点可以在$data-dir/etc/nexus-default.properties => 更改后访问 http://127.0.0.1:8088/nexus
 # 7、设置=>System=>Capabilities=>Outreach:Management=>Disable => 禁用这个,网络问题无法访问,控制台输出报错
 ```
@@ -118,6 +118,28 @@ com.mycorp.libx.autoconfigure.LibXWebAutoConfiguration
   <username>admin</username>
   <password>yourzhangjian</password>
 </server>
+
+# 使用maven工具 mvn部署现有组件到日有仓库(单个jar包使用)
+mvn deploy:deploy-file -DgroupId=<group-id> \
+-DartifactId=<artifact-id> \
+-Dversion=<version> \
+-Dpackaging=<type-of-packaging> \
+-Dfile=<path-to-file> \
+-DrepositoryId=<id-to-map-on-server-section-of-settings.xml> \
+-Durl=<url-of-the-repository-to-deploy>
+# 默认情况下，deploy:deploy-file生成一个通用POM,禁用设置为false
+-DgeneratePom=false
+# 如果第三方JAR的POM已经存在，并且您希望将其与JAR一起部署，我们应该使用部署文件目标的pomFile参数(下载的组件推荐使用)
+mvn deploy:deploy-file -DpomFile=<path-to-pom> \
+-Dfile=<path-to-file> \
+-DrepositoryId=<id-to-map-on-server-section-of-settings.xml> \
+-Durl=<url-of-the-repository-to-deploy>
+
+# 1、测试 在本地仓库找到当前组件的jar\pom, 复制出来并使用以下命令上传到私有仓库(一定要复制出来上传, 不然会报错jar找不到)
+mvn deploy:deploy-file -DpomFile=D:\Maven\demo-nexus-spring-boot-1.0.0.pom -Dfile=D:\Maven\demo-nexus-spring-boot-1.0.0.jar -DrepositoryId=nexus -Durl=http://127.0.0.1:8083/nexus3/repository/maven-releases/
+
+# 2、单个组件jar包上传
+mvn deploy:deploy-file -DgroupId=io.gitee.yourzhangjian -DartifactId=demo-nexus-spring-boot -Dversion=1.0.0 -Dpackaging=jar -Dfile=D:\Maven\demo-nexus-spring-boot-1.0.0.jar -DrepositoryId=nexus -Durl=http://127.0.0.1:8083/nexus3/repository/maven-releases/
 ```
 
 ```java
